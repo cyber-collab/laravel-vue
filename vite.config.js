@@ -20,5 +20,10 @@ export default defineConfig({
         alias: {
             '@': path.resolve(__dirname, 'resources/js/src'),
         },
-    }
+    },
+    build: {
+        rollupOptions: {
+            external: 'NonExistingPath'
+        }
+    },
 });
