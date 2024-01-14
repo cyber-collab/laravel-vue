@@ -1,7 +1,9 @@
 <template>
-	<PrimaryHeader />
 	<main class="main">
 		<router-view />
+        <aside class="sidebar">
+            <PrimaryHeader />
+        </aside>
 	</main>
 </template>
 

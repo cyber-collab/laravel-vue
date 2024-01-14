@@ -1,50 +1,33 @@
 <template>
-	<header class="header">
-		<ul class="header__menu nav nav-pills">
-			<li class="nav-item">
-				<router-link
-					aria-current="page"
-					class="nav-link"
-					to="/"
-					>Главная
-				</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link
-					class="nav-link"
-					to="/some-page"
-					>Какая-то страница
-				</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link
-					class="nav-link"
-					to="/about"
-					>О нас
-				</router-link>
-			</li>
-		</ul>
-	</header>
+    <div class="container">
+        <sidebar-menu :items="menuItems" />
+    </div>
 </template>
 
 <script lang="ts">
-	import { defineComponent } from 'vue';
 
-	export default defineComponent({
-		components: {},
-		setup() {
-			return {};
-		},
-	});
+export default defineComponent({
+    setup() {
+        const menuItems = [
+            { title: 'Home', icon: 'mdi-home', route: '/' },
+            { title: 'Some Page', icon: 'mdi-page', route: '/some-page' },
+            { title: 'About', icon: 'mdi-information', route: '/about' },
+        ];
+
+        return {
+            menuItems,
+        };
+    },
+});
 </script>
 
 <style lang="less" scoped>
-	.header {
-		width: 992px;
-		margin: 0 auto;
-		height: 100px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+.container {
+    display: flex;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
 </style>

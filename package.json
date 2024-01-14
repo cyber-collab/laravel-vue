@@ -1,21 +1,25 @@
 {
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build"
-  },
-  "devDependencies": {
-    "axios": "^1.1.2",
-    "laravel-vite-plugin": "^0.7.5",
-    "vite": "^4.0.0",
-    "prettier": "^2.8.8"
-  },
-  "dependencies": {
-    "@vitejs/plugin-vue": "^4.2.3",
-    "less": "^4.1.3",
-    "vue": "^3.2.36",
-    "vue-router": "^4.2.2",
-    "vuex": "^4.0.2"
-  }
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@popperjs/core": "^2.11.6",
+        "axios": "^1.1.2",
+        "bootstrap": "^5.2.3",
+        "laravel-vite-plugin": "^0.7.5",
+        "prettier": "^2.8.8",
+        "sass": "^1.56.1",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@vitejs/plugin-vue": "^4.2.3",
+        "less": "^4.1.3",
+        "vue": "^3.2.36",
+        "vue-router": "^4.2.2",
+        "vue-sidebar-menu": "^5.2.10",
+        "vuex": "^4.0.2"
+    }
 }
