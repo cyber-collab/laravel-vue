@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Employee;
+use App\Models\Position;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $employee = Employee::all()->count();
+        $employees = Employee::all();
+
+
+        return view('admin.home.index', [
+            'employee_count' => $employee,
+            'employees' => $employees,
+        ]);
     }
 }
