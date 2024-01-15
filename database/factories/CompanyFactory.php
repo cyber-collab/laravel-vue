@@ -19,13 +19,13 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company,
             'email' => $this->faker->safeEmail,
-            'website' => $this->faker->domainName,
+            'website' => $this->GenerationWebsite(),
             'logo' => $this->faker->image,
         ];
     }
 
-    // private function GenerationWebsite() : string
-    // {
-    //     return "www." . $this->faker->siteName";
-    // }
+    private function GenerationWebsite() : string
+    {
+        return "https:\\www." . $this->faker->domainName;
+    }
 }

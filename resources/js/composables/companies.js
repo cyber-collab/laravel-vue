@@ -71,7 +71,6 @@ export default function useCompanies() {
         await axios.delete('/api/companies/' + id)
     }
 
-
     return {
         companies,
         company,
