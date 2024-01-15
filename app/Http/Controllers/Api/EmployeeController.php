@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequest;
 use App\Models\Employee;
 use App\Http\Resources\EmployeeResource;
+use App\Models\Company;
 
 class EmployeeController extends Controller
 {

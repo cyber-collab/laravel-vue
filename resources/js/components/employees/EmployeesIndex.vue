@@ -26,6 +26,10 @@
                         class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Phone</span>
                     </th>
                     <th class="px-6 py-3 bg-gray-50">
+                    <span
+                        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Company</span>
+                    </th>
+                    <th class="px-6 py-3 bg-gray-50">
                     </th>
                 </tr>
             </thead>
@@ -46,6 +50,9 @@
                             {{ item.phone }}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                            {{ companies[item.company_id] || 'Завантаження...' }}
+                                                </td>
+                        <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                             <router-link :to="{ name: 'employees.edit', params: { id: item.id } }"
                                          class="mr-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
                                 Edit
@@ -65,9 +72,11 @@
 <script setup>
 import useEmployees from "@/composables/employees";
 import { onMounted } from "vue";
+import { ref } from 'vue'
 
-const { employees, getEmployees, destroyEmployee } = useEmployees()
+const { employees, getEmployees, companies, destroyEmployee } = useEmployees()
 onMounted(getEmployees)
+
 const deleteEmployee = async (id) => {
     if (!window.confirm('Are you sure?')) {
         return

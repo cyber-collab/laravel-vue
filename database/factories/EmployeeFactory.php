@@ -16,7 +16,7 @@ class EmployeeFactory extends Factory
         return [
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'company_id' => $this->faker->randomElement(Company::all()),
+            'company_id' => Company::inRandomOrder()->first()->id,
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->safeEmail,
         ];

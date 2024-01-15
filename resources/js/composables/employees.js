@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import axios from "axios";
 import { useRouter } from 'vue-router';
 
@@ -46,6 +46,24 @@ export default function useEmployees() {
         await axios.delete('/api/employees/' + id)
     }
 
+    const companies = ref({}); // Об'єкт для збереження імен компаній
+
+    const fetchCompanies = async () => {
+        try {
+            const response = await axios.get('/api/companies');
+            const companiesData = response.data.data;
+
+            // Зберігаємо імена компаній у внутрішньому стані
+            companies.value = companiesData.reduce((acc, company) => {
+                acc[company.id] = company.name;
+                return acc;
+            }, {});
+        } catch (error) {
+            console.error("Помилка отримання імен компаній:", error);
+        }
+    }
+
+    onMounted(fetchCompanies);
 
     return {
         employees,
@@ -55,6 +73,7 @@ export default function useEmployees() {
         getEmployee,
         storeEmployee,
         updateEmployee,
-        destroyEmployee
+        destroyEmployee,
+        companies,
     }
 }
