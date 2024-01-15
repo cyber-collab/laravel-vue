@@ -31,5 +31,6 @@ Restart the container!
 # Deploye project
 
 1. Please, open the terminal in repository, run `sail artisan migrate` and `sail artisan db:seed` for add tabels in db and data
-2. After that press to Login button and enter "admin@admin.com" and "password"
-3. And you can see results
+2. Run `npm install` and `npm run build`, you need have 16 versions node or higher
+3. After that press to Login button and enter "admin@admin.com" and "password"
+4. And you can see results
