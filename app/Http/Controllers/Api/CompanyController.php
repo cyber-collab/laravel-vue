@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+use Illuminate\Http\UploadedFile;
 
 class CompanyController extends Controller
 {
@@ -16,9 +17,24 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
-        $company = Company::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $this->storeLogo($file);
+            $data['logo'] = $fileName;
+        }
+
+        $company = Company::create($data);
 
         return new CompanyResource($company);
+    }
+
+    private function storeLogo(UploadedFile $file)
+    {
+        $fileName = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('images', $fileName, 'public');
+        return $fileName;
     }
 
     public function show(Company $company)
@@ -28,7 +44,15 @@ class CompanyController extends Controller
 
     public function update(CompanyRequest $request, Company $company)
     {
-        $company->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $this->storeLogo($file);
+            $data['logo'] = $fileName;
+        }
+
+        $company->update($data);
 
         return new CompanyResource($company);
     }

@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <form class="space-y-6" v-on:submit.prevent="saveCompany">
+    <form class="space-y-6" @submit.prevent=saveCompany() enctype="multipart/form-data">
         <div class="space-y-4 rounded-md shadow-sm">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
@@ -27,13 +27,10 @@
                 </div>
             </div>
 
-            <div>
-                <label for="address" class="block text-sm font-medium text-gray-700">Logo</label>
-                <div class="mt-1">
-                    <input type="text" name="logo" id="logo"
-                           class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                           v-model="company.logo">
-                </div>
+            <div class="mt-1">
+                <input type="file" name="logo" id="logo" accept="image/*"
+                       class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                       @change="handleFileUpload">
             </div>
 
             <div>
@@ -54,20 +51,28 @@
 </template>
 
 <script setup>
+import { defineProps, onMounted, reactive } from "vue";
 import useCompanies from "@/composables/companies";
-import { onMounted } from "vue";
 
-const { errors, company, getCompany, updateCompany } = useCompanies()
+const { errors, company, getCompany, updateCompany } = useCompanies();
 const props = defineProps({
     id: {
         required: true,
         type: String
     }
-})
+});
 
-onMounted(getCompany(props.id))
+onMounted(() => {
+    getCompany(props.id);
+});
 
 const saveCompany = async () => {
-    await updateCompany(props.id)
-}
+    await updateCompany(props.id);
+};
+
+const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    company.value.logo = file;
+    console.log(company.value.logo);
+};
 </script>

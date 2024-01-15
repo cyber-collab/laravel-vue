@@ -19,28 +19,53 @@ export default function useCompanies() {
     }
 
     const storeCompany = async (data) => {
-        errors.value = ''
+        const formData = new FormData();
+        Object.keys(data).forEach(key => {
+            if (key === 'logo' && data[key] instanceof File) {
+                formData.append(key, data[key]);
+            } else {
+                formData.append(key, data[key]);
+            }
+        });
         try {
-            await axios.post('/api/companies/', data)
+            await axios.post('/api/companies', formData);
             await router.push({name: 'companies.index'})
-        } catch (e) {
-            if (e.response.status === 422) {
+
+        } catch (error) {
+            if (error.response.status === 422) {
                 errors.value = e.response.data.errors
             }
         }
     }
 
-        const updateCompany = async (id) => {
-        errors.value = ''
+    const updateCompany = async (id) => {
+        errors.value = '';
+
         try {
-            await axios.put('/api/companies/' + id, company.value)
-            await router.push({name: 'companies.index'})
+            const formData = new FormData();
+            Object.keys(company.value).forEach(key => {
+                if (key === 'logo' && company.value[key] instanceof File) {
+                    formData.append('logo', company.value.logo);
+                } else {
+                    formData.append(key, company.value[key]);
+                }
+            });
+
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            };
+
+            await axios.post(`/api/companies/${id}?_method=PUT`, formData, config);
+            await router.push({ name: 'companies.index' });
         } catch (e) {
             if (e.response.status === 422) {
-                errors.value = e.response.data.errors
+                errors.value = e.response.data.errors;
             }
         }
-    }
+    };
+
 
     const destroyCompany = async (id) => {
         await axios.delete('/api/companies/' + id)

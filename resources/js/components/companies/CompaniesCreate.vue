@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <form class="space-y-6" @submit.prevent="saveCompany">
+    <form class="space-y-6" @submit.prevent="saveCompany" enctype="multipart/form-data">
         <div class="space-y-4 rounded-md shadow-sm">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
@@ -30,9 +30,12 @@
             <div>
                 <label for="logo" class="block text-sm font-medium text-gray-700">Logo</label>
                 <div class="mt-1">
-                    <input type="text" name="logo" id="logo"
-                           class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                           v-model="form.address">
+                    <input type="file" name="logo" id="logo" accept="image/*"
+                        class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        @change="handleFileUpload">
+                </div>
+                <div v-if="form.logo">
+                    File selected: {{ form.logo.name }}
                 </div>
             </div>
 
@@ -60,11 +63,16 @@ import useCompanies from "@/composables/companies";
 const form = reactive({
     'name': '',
     'email': '',
-    'logo': '',
+    'logo': null,
     'website': '',
 })
 const { errors, storeCompany } = useCompanies()
 const saveCompany = async () => {
     await storeCompany({ ...form });
+}
+
+const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    form.logo = file;
 }
 </script>

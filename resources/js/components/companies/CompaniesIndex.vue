@@ -40,7 +40,7 @@
                             {{ item.email }}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            {{ item.logo }}
+                            <img :src="item.logo" alt="Company Logo" style="max-width: 100px; max-height: 100px;">
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                             {{ item.website }}

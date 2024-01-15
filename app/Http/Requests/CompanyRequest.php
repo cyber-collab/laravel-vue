@@ -16,8 +16,18 @@ class CompanyRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'address' => ['nullable', 'string'],
             'website' => ['nullable', 'url'],
+            'logo' => 'nullable|file|mimes:jpeg,png|max:5000',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'The "Name" field is required.',
+            'email.required' => 'The "Email" field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'website.url' => 'Please enter a valid URL for the "Website" field.',
         ];
     }
 }
