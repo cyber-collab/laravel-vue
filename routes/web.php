@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,19 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+require __DIR__.'/auth.php';
 
-Route::get('employees', [EmployeeController::class, 'index'])->name('employees.index');
-Route::post('employees', [EmployeeController::class, 'store'])->name('employees.store');
-Route::get('employees/edit/{id}/', [EmployeeController::class, 'edit']);
-Route::post('employees/update', [EmployeeController::class, 'update'])->name('employees.update');
-Route::get('employees/destroy/{id}/', [EmployeeController::class, 'destroy']);
-Route::get('employees/show/{id}/', [EmployeeController::class, 'show'])->name('employees.show');
-
-// Route::resource('positions', PositionController::class);
-
-Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('homeAdmin');
-});
+Route::view('/{any}', 'dashboard')
+    ->middleware('auth')
+    ->where('any', '.*');
