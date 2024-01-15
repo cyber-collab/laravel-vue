@@ -13,9 +13,9 @@ use Illuminate\Http\Response;
 
 class CompanyController extends Controller
 {
-    public function __construct(
-        private ImageUploadServices $imageUploadService
-    ) {}
+    // public function __construct(
+    //     private ImageUploadServices $imageUploadService
+    // ) {}
 
     public function index(): AnonymousResourceCollection
     {
@@ -26,11 +26,23 @@ class CompanyController extends Controller
     {
         $data = $request->validated();
 
-        $this->imageUploadService->uploadImage($request, $data);
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $this->storeLogo($file);
+            $data['logo'] = $fileName;
+        }
+        // $this->imageUploadService->uploadImage($request, $data);
 
         $company = Company::create($data);
 
         return new CompanyResource($company);
+    }
+
+    private function storeLogo(UploadedFile $file): string
+    {
+        $fileName = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('images', $fileName, 'public');
+        return $fileName;
     }
 
     public function show(Company $company): CompanyResource
@@ -42,7 +54,13 @@ class CompanyController extends Controller
     {
         $data = $request->validated();
 
-        $this->imageUploadService->uploadImage($request, $data);
+        // $this->imageUploadService->uploadImage($request, $data);
+
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $this->storeLogo($file);
+            $data['logo'] = $fileName;
+        }
 
         $company->update($data);
 

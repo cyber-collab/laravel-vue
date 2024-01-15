@@ -10,6 +10,7 @@ class ImageUploadServices
    public function uploadImage(CompanyRequest $request, array $data): void
    {
         if ($request->hasFile('logo')) {
+            dump($request);
             $file = $request->file('logo');
             $fileName = $this->storeLogo($file);
             $data['logo'] = $fileName;
