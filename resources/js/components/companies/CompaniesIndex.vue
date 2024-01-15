@@ -19,7 +19,7 @@
                     </th>
                     <th class="px-6 py-3 bg-gray-50">
                     <span
-                        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Address</span>
+                        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Logo</span>
                     </th>
                     <th class="px-6 py-3 bg-gray-50">
                     <span
@@ -40,7 +40,7 @@
                             {{ item.email }}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            {{ item.address }}
+                            {{ item.logo }}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                             {{ item.website }}

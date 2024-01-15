@@ -30,11 +30,11 @@ export default function useEmployees() {
         }
     }
 
-        const updateEmployee = async (id) => {
-        errors.value = ''
-        try {
-            await axios.put('/api/employees/' + id, employee.value)
-            await router.push({name: 'Employees.index'})
+    const updateEmployee = async (id) => {
+    errors.value = ''
+    try {
+        await axios.put('/api/employees/' + id, employee.value)
+        await router.push({name: 'employees.index'})
         } catch (e) {
             if (e.response.status === 422) {
                 errors.value = e.response.data.errors

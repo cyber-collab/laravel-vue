@@ -28,9 +28,9 @@
             </div>
 
             <div>
-                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <label for="logo" class="block text-sm font-medium text-gray-700">Logo</label>
                 <div class="mt-1">
-                    <input type="text" name="address" id="address"
+                    <input type="text" name="logo" id="logo"
                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                            v-model="form.address">
                 </div>
@@ -60,7 +60,7 @@ import useCompanies from "@/composables/companies";
 const form = reactive({
     'name': '',
     'email': '',
-    'address': '',
+    'logo': '',
     'website': '',
 })
 const { errors, storeCompany } = useCompanies()
