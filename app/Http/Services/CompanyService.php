@@ -8,11 +8,11 @@ use App\Http\Services\ImageUploadServices;
 
 class CompanyService
 {
-    protected $uploadService;
+    // protected $uploadService;
 
-    public function __construct(ImageUploadServices $uploadService)
+    public function __construct(private ImageUploadServices $uploadService)
     {
-        $this->uploadService = $uploadService;
+        // $this->uploadService = $uploadService;
     }
 
     public function createCompany(CompanyRequest $request): Company
