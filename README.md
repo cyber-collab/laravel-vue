@@ -9,19 +9,10 @@ Please, clone this repository form github, by this options:
 | SHH    | [git@github.com:cyber-collab/laravel-vue.git](git@github.com:cyber-collab/laravel-vue.git) |
 | HTTPS  | [https://github.com/cyber-collab/laravel-vue](https://github.com/cyber-collab/laravel-vue) |
 
-# How to run docker
-
-Dependencies:
-
--   docker. See [https://docs.docker.com/engine/installation](https://docs.docker.com/engine/installation)
--   docker-compose. See [docs.docker.com/compose/install](https://docs.docker.com/compose/install/)
-
-Once you're done, simply `cd` to your project and run `composer install`. After this make `php artisan sail install && sail up -d`, this will initialise and start all the
-containers, then leave them running in the background.
-
 ## Services exposed outside your environment
 
-Create a .env file copy from env.example
+Create a .env file copy from env.example.
+In .env file add password for db connection.
 Restart the container!
 
 | Service   | Address outside containers    |
@@ -30,7 +21,10 @@ Restart the container!
 
 # Deploye project
 
-1. Please, open the terminal in repository, run `sail artisan migrate` and `sail artisan db:seed` for add tabels in db and data
-2. Run `npm install` and `npm run build`, you need have 16 versions node or higher
-3. After that press to Login button and enter "admin@admin.com" and "password"
-4. And you can see results
+1. Please, open the terminal in repository, run `composer install` and `php artisan sail:install`.
+2. Run `sail artisan migrate` and `sail artisan db:seed` for add tabels in db and data
+3. Run `sail artisan key:generate` for generate key.
+4. Run `php artisan storage:link` for create symbolic link, for upload images to public folder
+5. Run `npm install` and `npm run build`, you need have 16 versions node or higher, for build vue
+6. After that press to Login button and enter "admin@admin.com" and "password"
+7. And you can see results

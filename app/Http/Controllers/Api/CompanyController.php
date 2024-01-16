@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
-use Illuminate\Http\UploadedFile;
 use App\Http\Services\ImageUploadServices;
+use App\Http\Services\CompanyService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class CompanyController extends Controller
 {
-    // public function __construct(
-    //     private ImageUploadServices $imageUploadService
-    // ) {}
+
+    public function __construct(protected ImageUploadServices $uploadService, protected CompanyService $companyService)
+    {}
 
     public function index(): AnonymousResourceCollection
     {
@@ -24,25 +24,9 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request): CompanyResource
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
-            $fileName = $this->storeLogo($file);
-            $data['logo'] = $fileName;
-        }
-        // $this->imageUploadService->uploadImage($request, $data);
-
-        $company = Company::create($data);
+        $company = $this->companyService->createCompany($request);
 
         return new CompanyResource($company);
-    }
-
-    private function storeLogo(UploadedFile $file): string
-    {
-        $fileName = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('images', $fileName, 'public');
-        return $fileName;
     }
 
     public function show(Company $company): CompanyResource
@@ -53,16 +37,7 @@ class CompanyController extends Controller
     public function update(CompanyRequest $request, Company $company): CompanyResource
     {
         $data = $request->validated();
-
-        // $this->imageUploadService->uploadImage($request, $data);
-
-        if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
-            $fileName = $this->storeLogo($file);
-            $data['logo'] = $fileName;
-        }
-
-        $company->update($data);
+        $company = $this->companyService->updateCompany($company, $data);
 
         return new CompanyResource($company);
     }

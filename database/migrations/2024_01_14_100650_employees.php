@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->maxLength(256);
             $table->string('last_name')->maxLength(256);
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone')->maxLength(256);
+            $table->string('email')->maxLength(256);
             $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });

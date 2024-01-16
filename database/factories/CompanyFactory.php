@@ -26,6 +26,6 @@ class CompanyFactory extends Factory
 
     private function GenerationWebsite() : string
     {
-        return "https:\\www." . $this->faker->domainName;
+        return "https://www." . $this->faker->domainName;
     }
 }
