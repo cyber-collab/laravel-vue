@@ -31,4 +31,3 @@ Route::view('/{any}', 'dashboard')
     ->middleware('auth')
     ->where('any', '.*');
 
-Route::get('lang/{locale}', 'LocalizationController@setLocale');
