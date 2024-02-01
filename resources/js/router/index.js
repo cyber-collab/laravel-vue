@@ -4,10 +4,10 @@ import AccountsIndex from '@/components/accounts/AccountsIndex.vue'
 import AccountsCreate from '@/components/accounts/AccountsCreate.vue'
 import AccountsEdit from '@/components/accounts/AccountsEdit.vue'
 
-// //path for employees
-// import EmployeesIndex from '@/components/employees/EmployeesIndex.vue'
-// import EmployeesCreate from '@/components/employees/EmployeesCreate.vue'
-// import EmployeesEdit from '@/components/employees/EmployeesEdit.vue'
+//path for deals
+import DealsIndex from '@/components/deals/DealsIndex.vue'
+import DealsCreate from '@/components/deals/DealsCreate.vue'
+import DealsEdit from '@/components/deals/DealsEdit.vue'
 
 const routes = [
     {
@@ -27,22 +27,22 @@ const routes = [
         props: true
     },
 
-    // {
-    //     path: '/employees',
-    //     name: 'employees.index',
-    //     component: EmployeesIndex
-    // },
-    // {
-    //     path: '/employees/create',
-    //     name: 'employees.create',
-    //     component: EmployeesCreate
-    // },
-    // {
-    //     path: '/employees/:id/edit',
-    //     name: 'employees.edit',
-    //     component: EmployeesEdit,
-    //     props: true
-    // }
+    {
+        path: '/deals',
+        name: 'deals.index',
+        component: DealsIndex
+    },
+    {
+        path: '/deals/create',
+        name: 'deals.create',
+        component: DealsCreate
+    },
+    {
+        path: '/deals/:id/edit',
+        name: 'deals.edit',
+        component: DealsEdit,
+        props: true
+    }
 ];
 
 export default createRouter({

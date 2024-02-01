@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
             $table->string('deal_name', 255);
-            $table->string('account_name', 255);
             $table->date('closing_date');
+            $table->unsignedBigInteger('account_id')->nullable();
             $table->string('website')->nullable();
             $table->timestamps();
         });
