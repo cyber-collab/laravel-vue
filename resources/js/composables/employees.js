@@ -46,14 +46,13 @@ export default function useEmployees() {
         await axios.delete('/api/employees/' + id)
     }
 
-    const companies = ref({}); // Об'єкт для збереження імен компаній
+    const companies = ref({});
 
     const fetchCompanies = async () => {
         try {
             const response = await axios.get('/api/companies');
             const companiesData = response.data.data;
 
-            // Зберігаємо імена компаній у внутрішньому стані
             companies.value = companiesData.reduce((acc, company) => {
                 acc[company.id] = company.name;
                 return acc;

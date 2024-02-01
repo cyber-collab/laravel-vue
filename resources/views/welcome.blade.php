@@ -560,6 +560,22 @@
             </div>
         </div>
     </div>
-</body>
+    <script>
+        let salaries = {
+            John: 100,
+            Ann: 160,
+            Pete: 130
+        }
 
-</html>
+        function calculateSum(object) {
+            let sum = 0;
+            for (let key in object) {
+                sum += object[key];
+            }
+            return sum;
+        }
+
+        console.log(calculateSum(salaries));
+    </script>
+    < /body>
+        < /html>
