@@ -22,7 +22,8 @@ export default function useDeals() {
         errors.value = ''
         try {
             await axios.post('/api/deals/', data)
-            await router.push({name: 'deals.index'})
+            const successMessage = 'Deal successfully created!';
+            await router.push({name: 'deals.index', query: { successMessage }})
         } catch (e) {
             if (e.response.status === 422) {
                 errors.value = e.response.data.errors
@@ -34,7 +35,8 @@ export default function useDeals() {
     errors.value = ''
     try {
         await axios.put('/api/deals/' + id, deal.value)
-        await router.push({name: 'deals.index'})
+        const successUpdateMessage = 'Deal successfully updated!';
+        await router.push({name: 'deals.index', query: { successUpdateMessage }})
         } catch (e) {
             if (e.response.status === 422) {
                 errors.value = e.response.data.errors

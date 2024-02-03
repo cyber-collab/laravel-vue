@@ -6,6 +6,18 @@
             </div>
         </div>
 
+        <div v-if="successMessage" class="bg-green-200 p-4 mb-4 rounded-md">
+            {{ successMessage }}
+        </div>
+
+        <div v-if="successUpdateMessage" class="bg-green-200 p-4 mb-4 rounded-md">
+            {{ successUpdateMessage }}
+        </div>
+
+        <div v-if="successRemoveMessage" class="bg-green-200 p-4 mb-4 rounded-md">
+            {{ successRemoveMessage }}
+        </div>
+
         <table class="min-w-full border divide-y divide-gray-200">
             <thead>
                 <tr>
@@ -40,7 +52,7 @@
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                             <router-link :to="{ name: 'accounts.edit', params: { id: item.id } }"
-                                         class="mr-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                                class="mr-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
                                 Edit
                             </router-link>
                             <button @click="deleteAccount(item.id)"
@@ -57,17 +69,31 @@
 
 <script setup>
 import useAccounts from "@/composables/accounts";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const { accounts, getAccounts, destroyAccount } = useAccounts()
 
 onMounted(getAccounts)
+
+const successRemoveMessage = ref('');
 
 const deleteAccount = async (id) => {
     if (!window.confirm('Are you sure?')) {
         return
     }
     await destroyAccount(id);
+    successRemoveMessage.value = 'Account successfully removed!';
     await getAccounts();
+}
+
+const router = useRouter();
+const route = useRoute();
+
+let successMessage = route.query.successMessage || '';
+let successUpdateMessage = route.query.successUpdateMessage || '';
+
+if (successMessage || successUpdateMessage) {
+    router.replace({ query: {} });
 }
 </script>

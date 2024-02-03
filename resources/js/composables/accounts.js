@@ -21,8 +21,9 @@ export default function useAccounts() {
     const storeAccount = async (data) => {
         errors.value = ''
         try {
-            await axios.post('/api/accounts/', data)
-            await router.push({name: 'accounts.index'})
+            await axios.post('/api/accounts/', data);
+            const successMessage = 'Account successfully created!';
+            await router.push({ name: 'accounts.index', query: { successMessage } });
         } catch (e) {
             if (e.response.status === 422) {
                 errors.value = e.response.data.errors
@@ -34,7 +35,8 @@ export default function useAccounts() {
         errors.value = ''
         try {
             await axios.put('/api/accounts/' + id, account.value)
-            await router.push({name: 'accounts.index'})
+            const successUpdateMessage = 'Account successfully updated!';
+            await router.push({ name: 'accounts.index', query: { successUpdateMessage } });
             } catch (e) {
                 if (e.response.status === 422) {
                     errors.value = e.response.data.errors

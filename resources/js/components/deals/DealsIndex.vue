@@ -6,6 +6,19 @@
             </div>
         </div>
 
+
+        <div v-if="successMessage" class="bg-green-200 p-4 mb-4 rounded-md">
+            {{ successMessage }}
+        </div>
+
+        <div v-if="successUpdateMessage" class="bg-green-200 p-4 mb-4 rounded-md">
+            {{ successUpdateMessage }}
+        </div>
+
+        <div v-if="successRemoveMessage" class="bg-green-200 p-4 mb-4 rounded-md">
+            {{ successRemoveMessage }}
+        </div>
+
         <table class="min-w-full border divide-y divide-gray-200">
             <thead>
                 <tr>
@@ -66,15 +79,29 @@
 import useDeals from "@/composables/deals";
 import { onMounted } from "vue";
 import { ref } from 'vue'
+import { useRoute, useRouter } from "vue-router";
 
 const { deals, getDeals, accounts, destroyDeal } = useDeals()
 onMounted(getDeals)
+
+const successRemoveMessage = ref('');
 
 const deleteDeal = async (id) => {
     if (!window.confirm('Are you sure?')) {
         return
     }
     await destroyDeal(id);
+    successRemoveMessage.value = 'Deal successfully removed!';
     await getDeals();
+}
+
+const router = useRouter();
+const route = useRoute();
+
+let successMessage = route.query.successMessage || '';
+let successUpdateMessage = route.query.successUpdateMessage || '';
+
+if (successMessage || successUpdateMessage) {
+    router.replace({ query: {} });
 }
 </script>
