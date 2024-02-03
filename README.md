@@ -12,6 +12,7 @@ Please, clone this repository form github, by this options:
 ## Services exposed outside your environment
 
 Create a .env file copy from env.example.
+Add key ZOHO in .env file for connecting to ZOHO API
 In .env file add password for db connection.
 Restart the container!
 
