@@ -21,10 +21,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/employees', function () {
-    return view('employees');
-})->middleware(['auth'])->name('employees');
-
 Route::get('/deals', function () {
     return view('deals');
 })->middleware(['auth'])->name('deals');

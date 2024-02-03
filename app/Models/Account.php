@@ -11,7 +11,7 @@ class Account extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'phone', 'website'];
+    protected $fillable = ['name', 'phone', 'zoho_record_id', 'website'];
 
     public function deal(): HasMany
     {

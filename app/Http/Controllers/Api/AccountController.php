@@ -8,9 +8,16 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use App\Http\Resources\AccountResource;
 use App\Models\Account;
+use App\Http\Services\AccountService;
 
 class AccountController extends Controller
 {
+    public function __construct(
+        private readonly ZohoController $zohoController,
+        private readonly AccountService $accountService
+    )
+    {}
+
     public function index(): AnonymousResourceCollection
     {
         return AccountResource::collection(Account::all());
@@ -18,7 +25,7 @@ class AccountController extends Controller
 
     public function store(AccountRequest $request): AccountResource
     {
-        $account = Account::create($request->validated());
+        $account = $this->accountService->createAccount($request);
 
         return new AccountResource($account);
     }
@@ -30,7 +37,7 @@ class AccountController extends Controller
 
     public function update(AccountRequest $request, Account $account): AccountResource
     {
-        $account->update($request->validated());
+        $account = $this->accountService->updateAccount($request, $account);
 
         return new AccountResource($account);
     }
