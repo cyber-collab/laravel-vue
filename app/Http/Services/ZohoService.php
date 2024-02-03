@@ -46,4 +46,13 @@ class ZohoService
         ])->withBody($data, 'application/json')
         ->put('https://www.zohoapis.eu/crm/v2/Accounts');
     }
+
+    public function deleteAccount(int $id)
+    {
+      Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Zoho-oauthtoken ' . $this->zohoAuthService->getAccessToken()->json()['access_token'],
+        ])
+        ->delete('https://www.zohoapis.eu/crm/v2/Accounts?ids=' . $id);
+    }
 }

@@ -13,7 +13,6 @@ use App\Http\Services\AccountService;
 class AccountController extends Controller
 {
     public function __construct(
-        private readonly ZohoController $zohoController,
         private readonly AccountService $accountService
     )
     {}
@@ -44,7 +43,7 @@ class AccountController extends Controller
 
     public function destroy(Account $account): Response
     {
-        $account->delete();
+        $this->accountService->deleteAccount($account);
 
         return response()->noContent();
     }
