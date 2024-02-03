@@ -11,7 +11,7 @@ class Deal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['deal_name', 'closing_date', 'account_id', 'website'];
+    protected $fillable = ['deal_name', 'closing_date', 'account_id', 'stage', 'zoho_record_id'];
 
     public function company(): BelongsTo
     {

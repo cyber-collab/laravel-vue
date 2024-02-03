@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\ZohoServices;
 
 use Illuminate\Support\Facades\Http;
 
-class ZohoService
+class ZohoAccountService
 {
     public function __construct(private readonly ZohoAuthService $zohoAuthService)
     {
     }
 
-    public function createAccount(array $requestData): string
+    public function createZohoAccount(array $requestData): string
     {
         $data = json_encode([
             "data" => [
                 [
                     "Account_Name" => $requestData['name'],
+                    "Phone" => $requestData['phone'],
+                    "Website" => $requestData['website']
                 ]
             ]
         ]);
@@ -29,13 +31,15 @@ class ZohoService
         return $response->json()['data'][0]['details']['id'];
     }
 
-    public function updateAccount(array $requestData)
+    public function updateZohoAccount(array $requestData)
     {
         $data = json_encode(
             array(
                 "data" => array([
                     "id" => $requestData['zoho_record_id'],
                     "Account_Name" => $requestData['name'],
+                    "Phone" => $requestData['phone'],
+                    "Website" => $requestData['website']
                 ])
             )
         );
@@ -47,8 +51,9 @@ class ZohoService
         ->put('https://www.zohoapis.eu/crm/v2/Accounts');
     }
 
-    public function deleteAccount(int $id)
+    public function deleteZohoAccount(int $id)
     {
+        dd($id);
       Http::withHeaders([
             'Content-Type' => 'application/json',
             'Authorization' => 'Zoho-oauthtoken ' . $this->zohoAuthService->getAccessToken()->json()['access_token'],

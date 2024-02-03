@@ -26,7 +26,7 @@ class AccountRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'phone' => ['required'],
-            'website' => ['nullable', 'url'],
+            'website' => ['required', 'url'],
         ];
     }
 

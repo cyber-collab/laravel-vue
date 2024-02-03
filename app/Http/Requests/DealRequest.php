@@ -21,8 +21,8 @@ class DealRequest extends FormRequest
         return [
             'deal_name' => ['required', 'string'],
             'closing_date' => ['required', 'date'],
-            'account_id' => ['required', 'string'],
-            'website' => ['required'],
+            'account_id' => ['required', 'int'],
+            'stage' => ['required', 'string'],
         ];
     }
 
@@ -32,7 +32,7 @@ class DealRequest extends FormRequest
             'deal_name.required' => 'The "Deal Name" field is required.',
             'closing_date.required' => 'The "Closing Date" field is required.',
             'account_id.required' => 'The "Account ID" field is required.',
-            'website.required' => 'The "Email" field is required.',
+            'stage.required' => 'The "Stage" field is required.',
         ];
     }
 }

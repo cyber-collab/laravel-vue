@@ -21,7 +21,7 @@
             <div>
                 <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
                 <div class="mt-1">
-                    <input type="number" name="phone" id="phone"
+                    <input type="text" name="phone" id="phone"
                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                            v-model="form.phone">
                 </div>

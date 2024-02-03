@@ -5,18 +5,18 @@ namespace App\Http\Services;
 use App\Models\Account;
 use App\Http\Requests\AccountRequest;
 use App\Http\Resources\AccountResource;
-use App\Http\Controllers\Api\ZohoController;
+use App\Http\Services\ZohoServices\ZohoAccountService;
 
 class AccountService
 {
-    public function __construct(private readonly ZohoService $zohoService)
+    public function __construct(private readonly ZohoAccountService $zohoAccountService)
     {
     }
 
     public function createAccount(AccountRequest $request): Account
     {
         $account = Account::create($request->validated());
-        $zohoAccountId = $this->zohoService->createAccount($account->toArray());
+        $zohoAccountId = $this->zohoAccountService->createZohoAccount($account->toArray());
         $this->setZohoAccountIdToAccount($account, $zohoAccountId);
 
         return $account;
@@ -27,14 +27,14 @@ class AccountService
         $account->update($request->validated());
         $accountResource = new AccountResource($account);
         $requestData = $accountResource->toArray($request);
-        $this->zohoService->updateAccount($requestData);
+        $this->zohoAccountService->updateZohoAccount($requestData);
 
         return $account;
     }
 
     public function deleteAccount(Account $account): void
     {
-        $this->zohoService->deleteAccount($account->zoho_record_id);
+        $this->zohoAccountService->deleteZohoAccount($account->zoho_record_id);
         $account->delete();
     }
 

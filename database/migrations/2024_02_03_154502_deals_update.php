@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('deals', function (Blueprint $table) {
-            $table->id();
-            $table->string('deal_name', 255);
-            $table->date('closing_date');
-            $table->unsignedBigInteger('account_id')->nullable();
-            $table->string('stage')->nullable();
-            $table->timestamps();
+        Schema::table('deals', function (Blueprint $table) {
+            $table->bigInteger('zoho_record_id')->nullable();
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deals');
+        Schema::table('deals', function (Blueprint $table) {
+            $table->dropColumn(['zoho_record_id']);
+        });
     }
 };

@@ -56,6 +56,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Self Signed Token
+    |--------------------------------------------------------------------------
+    |
+    | Zoho's token for OAuth process
+    | Depending on $auth_flow_type (see below) this could be a grantToken, refreshToken or accessToken
+    |
+    */
+    'refresh_token' => env(' ZOHO_REFRESH_TOKEN', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Authentication Flow Type
     |--------------------------------------------------------------------------
     |

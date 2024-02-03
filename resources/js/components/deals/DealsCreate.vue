@@ -28,11 +28,11 @@
             </div>
 
             <div>
-                <label for="website" class="block text-sm font-medium text-gray-700">Website</label>
+                <label for="stage" class="block text-sm font-medium text-gray-700">Stage</label>
                 <div class="mt-1">
-                    <input type="text" name="website" id="website"
+                    <input type="text" name="stage" id="stage"
                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                           v-model="form.website">
+                           v-model="form.stage">
                 </div>
             </div>
 
@@ -64,7 +64,7 @@ import useDeals from "@/composables/deals";
 const form = reactive({
     'deal_name': '',
     'closing_date': '',
-    'website': '',
+    'stage': '',
 })
 const { errors, storeDeal, accounts } = useDeals()
 const saveDeal = async () => {

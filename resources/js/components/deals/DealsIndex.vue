@@ -19,7 +19,7 @@
                     </th>
                     <th class="px-6 py-3 bg-gray-50">
                     <span
-                        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Website</span>
+                        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Stage</span>
                     </th>
                     <th class="px-6 py-3 bg-gray-50">
                     <span
@@ -40,7 +40,7 @@
                             {{ item.closing_date }}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            {{ item.website }}
+                            {{ item.stage }}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                             {{ accounts[item.account_id] }}
