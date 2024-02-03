@@ -53,7 +53,6 @@ class ZohoAccountService
 
     public function deleteZohoAccount(int $id)
     {
-        dd($id);
       Http::withHeaders([
             'Content-Type' => 'application/json',
             'Authorization' => 'Zoho-oauthtoken ' . $this->zohoAuthService->getAccessToken()->json()['access_token'],
